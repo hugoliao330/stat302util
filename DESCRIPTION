@@ -1,0 +1,14 @@
+Package: stat302util
+Title: Utilities for STAT302 at UW
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Junxi",
+           family = "Liao",
+           role = c("aut", "cre"),
+           email = "hugo330@uw.edu",
+           )
+Description: This package includes utility functions that are essential for STAT302.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
