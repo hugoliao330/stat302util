@@ -1,0 +1,20 @@
+---
+title: "Project 3: state302util Tutorial"
+author: "Junxi Liao"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{state302util Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(stat302util)
+```
