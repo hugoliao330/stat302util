@@ -1,21 +1,17 @@
-#' Edgar Anderson's Iris Data
+#' Gapminder Data
 #'
-#' The well-known \code{\link[datasets]{iris}} dataset taken from the
-#' \code{datasets} package to practice adding datasets to our R package.
+#' Excerpt of the Gapminder data on life expectancy, GDP per capita, and
+#' population by country.
 #'
-#' @format a data frame with 150 observations and 5 variables:
+#' @format The main data frame \code{gapminder} has 1704 rows and 6 variables:
 #' \describe{
-#' \item{Sepal.Length}{sepal length, in cm}
-#' \item{Sepal.Width}{sepal width, in cm}
-#' \item{Petal.Length}{petal length, in cm}
-#' \item{Petal.Width}{petal width, in cm}
-#' \item{Species}{species of iris}
+#' \item{country}{factor with 142 levels}
+#' \item{continent}{factor with 5 levels}
+#' \item{year}{ranges from 1952 to 2007 in increments of 5 years}
+#' \item{lifeExp}{life expectancy at birth, in years}
+#' \item{pop}{population}
+#' \item{gdpPercap}{GDP per capita (US$, inflation-adjusted)}
 #' }
 #'
-#' @source
-#' Fisher, R. A. (1936) The use of multiple measurements in taxonomic problems.
-#' \emph{Annals of Eugenics}, 7, Part II, 179-188.
-#'
-#' The data were collected by Anderson, Edgar (1935). The irises of the Gaspe
-#' Peninsula, \emph{Bulletin of the American Iris Society}, 59, 2-5.
-"my_iris"
+#' @source \url{http://www.gapminder.org/data/}
+"my_gapminder"
