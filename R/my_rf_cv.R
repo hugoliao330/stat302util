@@ -12,17 +12,25 @@
 #'
 #' @return a numeric with the cross-validation error.
 #'
+#' @import class randomForest
+#'
 #' @export
 my_rf_cv <- function(trainx, trainy, k) {
   fold <- sample(rep(1:k, length = nrow(trainx)))
   df <- data.frame(trainy, trainx, "fold" = fold)
   mse <- rep(NA, length = k)
-  for (i in 1:k) {
-    data_train <- df %>% filter(fold != i)
-    data_test <- df %>% filter(fold == i)
+  if (ncol(trainx) > 1) {
     fmla <- as.formula(paste(colnames(trainy),
                              "~",
                              paste(colnames(trainx), collapse = "+")))
+  } else {
+    fmla <- as.formula(paste(colnames(trainy), "~", colnames(trainx)))
+  }
+
+  for (i in 1:k) {
+    data_train <- df %>% filter(fold != i)
+    data_test <- df %>% filter(fold == i)
+
     model <- randomForest(fmla, data = data_train, ntree = 100)
     predictions <- predict(model, data_test[, -1])
     mse[i] <- sum((data_test[, 1] - predictions) ^ 2) / nrow(data_test)
