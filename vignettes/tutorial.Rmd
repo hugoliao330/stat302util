@@ -106,20 +106,20 @@ Again, I will demonstrate this function using data from \code{my_gapminder}.
 
 We can predict output class \code{continent} using covariates \code{gdpPercap} and \code{lifeExp} with a 5-fold cross validation. I will also iterate from 1 to 10 for the kth-nearest-neighbor for this function, in an effort to compare the training misclassification rate as well as the CV misclassification rate.
 ```{r}
-#train <- data.frame(mgm$gdpPercap, mgm$lifeExp)
-#true_cl <- mgm$continent
-#train_mc <- rep(NA, length = 10)
-#cv_mc <- rep(NA, length = 10)
+train <- data.frame(mgm$gdpPercap, mgm$lifeExp)
+true_cl <- mgm$continent
+train_mc <- rep(NA, length = 10)
+cv_mc <- rep(NA, length = 10)
 
-#for (i in 1:10) {
-#  result <- my_knn_cv(train = train, cl = true_cl, k_nn = i, k_cv = 5)
-#  train_mc[i] <- result$cv_err
-#  cv_mc[i] <- mean(true_cl != result$class)
-#}
+for (i in 1:10) {
+  result <- my_knn_cv(train = train, cl = true_cl, k_nn = i, k_cv = 5)
+  train_mc[i] <- result$cv_err
+  cv_mc[i] <- mean(true_cl != result$class)
+}
 
 # show results
-#train_mc
-#cv_mc
+train_mc
+cv_mc
 ```
 
 Based on training misclassification rate I would choose around \code{k_nn = 8}. Based on the CV misclassification rate I would choose \code{k_nn = 1}. However, choosing the optimal \code{k_nn} value based on true misclassificaiton rates in such a small sample is not reasonable. In practice, we should choose based on the training misclassification rate because it better represents how my model will react to data excluded by the training data. Cross-validation is able to acheive this because it randomly splits the training data in \code{k_cv} folds. Everytime, it uses all but one fold of data to train the model and then to fit it to the last fold of data. This increases flexibility of the model and thus accuracy in unknowns.
