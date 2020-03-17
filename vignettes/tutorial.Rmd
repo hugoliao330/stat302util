@@ -105,14 +105,14 @@ With the information given by the result of \code{my_lm}, and given a p-value cu
 
 We can use a ggplot 2 to visualize the actual verses fitted values.
 ```{r}
-mod_fits <- fitted(my_lm)
-my_df <- data.frame(actual = mtcars$mpg, fitted = mod_fits)
-ggplot(my_df, aes(x = fitted, y = actual)) +
-  geom_point() +
-  geom_abline(slope = 1, intercept = 0, col = "red", lty = 2) + 
-  theme_bw(base_size = 15) +
-  labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") +
-  theme(plot.title = element_text(hjust = 0.5))
+#mod_fits <- fitted(my_lm)
+#my_df <- data.frame(actual = mtcars$mpg, fitted = mod_fits)
+#ggplot(my_df, aes(x = fitted, y = actual)) +
+#  geom_point() +
+#  geom_abline(slope = 1, intercept = 0, col = "red", lty = 2) + 
+#  theme_bw(base_size = 15) +
+#  labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") +
+#  theme(plot.title = element_text(hjust = 0.5))
 ```
 
 # Tutorial for my_knn_cv
@@ -142,4 +142,4 @@ Based on training misclassification rate I would choose \code{k_nn = 9}. Based o
 # Tutorial for my_rf_cv
 As usual, I will use the data from \code{my_gapminder} to demonstrate the functionalities. 
 
-
+Let's predict the \code{lifeExp} using covariate \code{gdpPercap}. 
