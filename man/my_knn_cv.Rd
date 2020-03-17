@@ -2,10 +2,26 @@
 % Please edit documentation in R/my_knn_cv.R
 \name{my_knn_cv}
 \alias{my_knn_cv}
-\title{k-Nearest Neighbors Cross-Validation}
+\title{k-Nearest Neighbors Cross-Validation Classification}
 \usage{
 my_knn_cv(train, cl, k_nn, k_cv)
 }
-\description{
-k-Nearest Neighbors Cross-Validation
+\arguments{
+\item{train}{input data frame.}
+
+\item{cl}{true class value of your training data.}
+
+\item{k_nn}{integer representing the number of neighbors.}
+
+\item{k_cv}{integer representing the number of folds.}
 }
+\value{
+a list with objects \code{class}, a vector of the predicted class
+  for all observations, and \code{cv_err}, a numeric with the
+  cross-validation misclassification error.
+}
+\description{
+k-nearest neighbor cross-validatory classification from training set.
+}
+\keyword{inference}
+\keyword{prediction}

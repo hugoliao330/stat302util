@@ -1,13 +1,19 @@
-#' k-Nearest Neighbors Cross-Validation
+#' k-Nearest Neighbors Cross-Validation Classification
 #'
+#' k-nearest neighbor cross-validatory classification from training set.
 #'
-# Input: train, input data frame
-# Input: cl, true class value of the training data
-# Input: k_nn, integer representing the number of neighbors
-# Input: k_cv, integer representing the number of folds
-# Output: a list with objects class - a vector of the predicted class y_hat_i
-#         for all obsevations, and cv_err - a numeric with the cross validation
-#         misclassification error
+#' @param train input data frame.
+#' @param cl true class value of your training data.
+#' @param k_nn integer representing the number of neighbors.
+#' @param k_cv integer representing the number of folds.
+#'
+#' @keywords inference prediction
+#'
+#' @return a list with objects \code{class}, a vector of the predicted class
+#'   for all observations, and \code{cv_err}, a numeric with the
+#'   cross-validation misclassification error.
+#'
+#' @export
 my_knn_cv <- function(train, cl, k_nn, k_cv) {
   fold <- sample(rep(1:k_cv, length = nrow(train)))
   data <- data.frame(train, "fold" = fold)
@@ -17,8 +23,9 @@ my_knn_cv <- function(train, cl, k_nn, k_cv) {
     data_train <- data %>% filter(fold != i)
     data_test <- data %>% filter(fold == i)
     class <- cl_folded %>% filter(fold != i)
-    #print(paste("iteration ", i, "; test data", data_test))
-    prediction <- knn(train = data_train[, -5], test = data_test[, -5], cl = class[, 1], k = k_nn)
+    prediction <- knn(train = data_train[, -ncol(data_train)],
+                      test = data_test[, -ncol(data_train)],
+                      cl = class[, 1], k = k_nn)
     misclassification_rate[i] <- mean(prediction != class[, 1])
   }
   class <- knn(train, train, cl, k_nn)

@@ -18,3 +18,31 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(stat302util)
 ```
+
+# Introductory
+The package \code{stat302util} contains the functions that are taught and built 
+in the STAT302 course. The functions contained make inferences and/or
+predictions based on the input data. Namely, this package has the ability to 
+perform a t-test, to fit linear models, to find the k-nearest neighbor cross-
+validatory classification, and to make random forest cross-validation 
+prediction. 
+
+This package is built following Bryan D Martin's instruction from 
+\link[https://bryandmartin.github.io/STAT302/docs/LectureSlides/lectureslides9/lectureslides9.html#1]. 
+
+
+Install \texttt{stat302util} using:
+```{r}
+devtools::install_github("hugoliao330/stat302util", build_vignette = TRUE, build_opts = c())
+library(stat302util)
+# Use this to view the vignette in the Demo HTML help
+help(package = "stat302util", help_type = "html")
+# Use this to view the vignette as an isolated HTML file
+utils::browseVignettes(package = "stat302util")
+```
+
+
+
+
+
+
