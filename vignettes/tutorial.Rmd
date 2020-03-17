@@ -31,15 +31,6 @@ To begin, we load our package from library:
 library(stat302util)
 ```
 
-To view the vignette in the stat302util HTML help:
-```{r}
-help(package = "stat302util", help_type = "html")
-```
-
-To view the vignette as an isolated HTML file:
-```{r}
-utils::browseVignettes(package = "stat302util")
-```
 
 # Tutorial for my_t.test
 This function gives statistics of the t-score, degree of freedom, and the p-value. 
@@ -108,16 +99,6 @@ We can use a ggplot 2 to visualize the actual verses fitted values. First, let's
 library(ggplot2)
 ```
 
-```{r}
-#mod_fits <- fitted(my_lm)
-#my_df <- data.frame(actual = mtcars$mpg, fitted = mod_fits)
-#ggplot(my_df, aes(x = fitted, y = actual)) +
-#  geom_point() +
-#  geom_abline(slope = 1, intercept = 0, col = "red", lty = 2) + 
-#  theme_bw(base_size = 15) +
-#  labs(x = "Fitted values", y = "Actual values", title = "Actual vs. Fitted") +
-#  theme(plot.title = element_text(hjust = 0.5))
-```
 
 # Tutorial for my_knn_cv
 
@@ -147,7 +128,7 @@ Based on training misclassification rate I would choose around \code{k_nn = 8}. 
 As usual, I will use the data from \code{my_gapminder} to demonstrate the functionalities. 
 
 Let's predict the \code{lifeExp} using covariate \code{gdpPercap}. 
-```{r}
+```{r, eval = FALSE}
 mse <- matrix(NA, nrow = 30, ncol = 3)
 k <- c(2, 5, 10)
 for (j in 1:3) {
