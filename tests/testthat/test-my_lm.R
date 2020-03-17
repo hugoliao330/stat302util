@@ -1,0 +1,18 @@
+test_that("my_lm gives correct result", {
+  data(mtcars)
+  a <- my_lm(formula = mpg ~ hp + wt, data = mtcars)
+  b <- summary(lm(formula = mpg ~ hp + wt, data = mtcars))[["coefficients"]]
+  b <- as.matrix(b)
+  expect_equal(a[1,1], b[1,1])
+  expect_equal(a[1,2], b[1,2])
+  expect_equal(a[1,3], b[1,3])
+  expect_equal(a[1,4], b[1,4])
+  expect_equal(a[2,1], b[2,1])
+  expect_equal(a[2,2], b[2,2])
+  expect_equal(a[2,3], b[2,3])
+  expect_equal(a[2,4], b[2,4])
+  expect_equal(a[3,1], b[3,1])
+  expect_equal(a[3,2], b[3,2])
+  expect_equal(a[3,3], b[3,3])
+  expect_equal(a[3,4], b[3,4])
+})
