@@ -20,29 +20,92 @@ library(stat302util)
 ```
 
 # Introductory
-The package \code{stat302util} contains the functions that are taught and built 
-in the STAT302 course. The functions contained make inferences and/or
-predictions based on the input data. Namely, this package has the ability to 
-perform a t-test, to fit linear models, to find the k-nearest neighbor cross-
-validatory classification, and to make random forest cross-validation 
-prediction. 
+The package \code{stat302util} contains the functions that are taught and built in the STAT302 course. The functions contained make inferences and/or predictions based on the input data. Namely, this package has the ability to perform a t-test, to fit linear models, to find the k-nearest neighbor cross-validatory classification, and to make random forest cross-validation prediction. 
 
-This package is built following Bryan D Martin's instruction from 
-\link[https://bryandmartin.github.io/STAT302/docs/LectureSlides/lectureslides9/lectureslides9.html#1]. 
+This package is built following Bryan D Martin's instruction from \link[https://bryandmartin.github.io/STAT302/docs/LectureSlides/lectureslides9/lectureslides9.html#1]. 
 
 
 Install \texttt{stat302util} using:
-```{r}
+```{r, eval = FALSE}
 devtools::install_github("hugoliao330/stat302util", build_vignette = TRUE, build_opts = c())
+```
+
+To begin, we load our package from library:
+```{r, message = FALSE}
 library(stat302util)
-# Use this to view the vignette in the Demo HTML help
+```
+
+To view the vignette in the stat302util HTML help:
+```{r}
 help(package = "stat302util", help_type = "html")
-# Use this to view the vignette as an isolated HTML file
+```
+
+To view the vignette as an isolated HTML file:
+```{r}
 utils::browseVignettes(package = "stat302util")
 ```
 
+# Tutorial for my_t.test
+This function gives statistics of the t-score, degree of freedom, and the p-value. 
 
+To start, we will use the \code{lifeExp} data from \code{my_gapminder}. 
+```{r}
+mgm <- my_gapminder
+le <- mgm$lifeExp
+```
 
+To test the hypothesis on the \code{lifeExp} data where
+\begin{align}
+  H_0: \mu &= 60,\\
+  H_a: \mu &\neq 60.
+  \end{align}
+
+```{r}
+my_t.test(x = le, alternative = "two.sided", mu = 60)
+``` 
+With an alpha threshold of 0.05, this means that we should not rejected the null hypothesis as the p-value exceeds the threshold, and the null hypothesis holds.
+
+To test the hypothesis where 
+\begin{align}
+  H_0: \mu &= 60,\\
+  H_a: \mu &< 60.
+  \end{align}
+
+```{r}
+my_t.test(x = le, alternative = "less", mu = 60)
+```
+With $\alpha = 0.05$, we reject the null hypothesis, meaning that the true mean of life expectancy of the population should be less than 60 years old.
+
+To test the hypothesis where
+\begin{align}
+  H_0: \mu &= 60,\\
+  H_a: \mu &> 60.
+  \end{align}
+```{r}
+my_t.test(x = le, alternative = "greater", mu = 60)
+```
+In this case, we definitely cannot reject the null hypothesis, as this is the exact opposite of the last hypothesis we tested. 
+
+For more information, you can see the documentation of this function by typing this in your console:
+```{r}
+?my_t.test
+```
+
+#Tutorial for my_lm
+This function fits the data with a linear regression model on response variable and explanatory variables.
+
+I will demonstrate this function with data from \code{my_gapminder}, where \code{lifeExp} would be my response variable and \code{gdpPercap} and \code{continent} as explanatory variables.
+
+```{r}
+ml <- my_lm(formula = lifeExp ~ gdpPercap + continent, mgm)
+ml
+```
+
+The coefficient for \code{gdpPercap} is `r ml$Estimate[2]`, which is fairly low compared to the coefficients for \code{continent}. This number indicates the correlation between \code{gdpPercap} and the response variable \code{lifeExp}. 
+
+We can propose a hypothesis test associated with the \code{gdpPercap} coefficient, where the null hypothesis is that the coefficient of co-variate \code{gdpPercap} is zero, meaning there is no correlation at all, whereas the alterantive hypothesis would be that the coefficient is not zero, meaning there is a correlation. 
+
+With the information given by the result of \code{my_lm}, and given a p-value cut-off of $\alpha = 0.05$, we can safely conclude that the null hypothesis is rejected and that the alternative hypothesis holds because of the low p-value of `r ml$Pr...t..[2]`. 
 
 
 
